@@ -7,6 +7,9 @@
 
 import Foundation
 
-class CharacterListViewModel {
+class CharacterListViewModel: BaseViewModel {
     
+    override init() {
+        super.init()
+    }
 }

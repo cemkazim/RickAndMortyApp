@@ -9,3 +9,4 @@ import Foundation
 
 typealias RequestCompletion<T> = (Result<T, Error>) -> Void
 typealias CharacterListCompletion = (Result<CharacterListModel, Error>) -> Void
+typealias EpisodeDetailCompletion = (Result<EpisodeDetailModel, Error>) -> Void

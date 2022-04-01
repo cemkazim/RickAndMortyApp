@@ -19,4 +19,13 @@ class DataProvider {
             completionHandler(result)
         }
     }
+    
+    func getEpisodeDetail(stringURLList: [String], completionHandler: @escaping EpisodeDetailCompletion) {
+        for stringURL in stringURLList {
+            guard let url = URL(string: stringURL) else { return }
+            APIManager.shared.request(url: url, requestMethod: .get) { (result: Result<EpisodeDetailModel, Error>) in
+                completionHandler(result)
+            }
+        }
+    }
 }

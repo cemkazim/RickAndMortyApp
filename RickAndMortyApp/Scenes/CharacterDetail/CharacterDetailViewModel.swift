@@ -1,0 +1,47 @@
+//
+//  CharacterDetailViewModel.swift
+//  RickAndMortyApp
+//
+//  Created by Cem Kazım Genel on 01/04/2022.
+//
+
+import Foundation
+
+class CharacterDetailViewModel {
+    
+    private var characterResult: CharacterResult?
+    private var episodeList: [String] = []
+    var showErrorAlertViewCallback: ((Error) -> Void)?
+    var listenEpisodeDetailCallback: (() -> Void)?
+    
+    init(characterResult: CharacterResult? = nil) {
+        self.characterResult = characterResult
+    }
+    
+    func getData() {
+        guard let episodeList = characterResult?.episode else { return }
+        DataProvider.shared.getEpisodeDetail(stringURLList: episodeList) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                self.showErrorAlertViewCallback?(error)
+            case .success(let data):
+                self.handleCharacterList(with: data)
+                self.listenEpisodeDetailCallback?()
+            }
+        }
+    }
+    
+    private func handleCharacterList(with model: EpisodeDetailModel) {
+        let episode = "\(model.name ?? "") - \(model.episode ?? "")"
+        episodeList.append(episode)
+    }
+    
+    func getEpisodeList() -> [String] {
+        return episodeList
+    }
+    
+    func getCharacterResult() -> CharacterResult? {
+        return characterResult
+    }
+}

@@ -68,7 +68,7 @@ class CharacterListViewController: UIViewController {
     private func setupCollectionView() {
         characterListCollectionView.delegate = self
         characterListCollectionView.dataSource = self
-        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.characterListViewControllerCellId)
+        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.CharacterList.cellId)
     }
     
     private func reloadCollectionView() {
@@ -77,6 +77,16 @@ class CharacterListViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.characterListCollectionView.reloadData()
+            }
+        }
+        viewModel?.showErrorAlertViewCallback = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let alertView = AlertView.shared.getAlertView(title: Constants.AlertView.title,
+                                                              message: error.localizedDescription,
+                                                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
+                                                              dismissButtonCallback: nil)
+                self.present(alertView, animated: true)
             }
         }
     }
@@ -90,7 +100,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.characterListViewControllerCellId, for: indexPath) as? CharacterListCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CharacterList.cellId, for: indexPath) as? CharacterListCollectionViewCell else {
             return UICollectionViewCell()
         }
         let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
@@ -99,7 +109,10 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let characterDetailViewController = CharacterDetailViewController()
+        let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
+        characterDetailViewController.viewModel = CharacterDetailViewModel(characterResult: characterResult)
+        present(characterDetailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -113,11 +126,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

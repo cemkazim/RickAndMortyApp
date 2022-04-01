@@ -13,10 +13,11 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     private var characterImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 157, height: 180))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -68,6 +69,7 @@ extension CharacterListCollectionViewCell {
     
     func updateCell(with result: CharacterResult?) {
         guard let result = result else { return }
+        characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         characterImageView.sd_setImage(with: URL(string: result.image ?? ""))
         characterNameLabel.text = result.name
     }

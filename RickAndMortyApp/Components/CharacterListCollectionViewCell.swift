@@ -66,6 +66,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - CharacterListCollectionViewCell
+
 extension CharacterListCollectionViewCell {
     
     func updateCell(with result: CharacterResult?) {

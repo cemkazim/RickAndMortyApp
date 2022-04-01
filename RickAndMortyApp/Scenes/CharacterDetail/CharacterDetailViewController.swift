@@ -8,7 +8,9 @@
 import UIKit
 import SDWebImage
 
-class CharacterDetailViewController: UIViewController {
+class CharacterDetailViewController: BaseViewController {
+    
+    // MARK: - Properties
     
     private var doneButton: UIButton = {
         let button = UIButton()
@@ -75,10 +77,10 @@ class CharacterDetailViewController: UIViewController {
     }()
     
     private var isTableViewVisible = false
+
+    var viewModel = CharacterDetailViewModel()
     
-    private var loaderView = UIActivityIndicatorView(style: .whiteLarge)
-    
-    var viewModel: CharacterDetailViewModel?
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,8 @@ class CharacterDetailViewController: UIViewController {
         reloadTableView()
         setupErrorHandling()
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(doneButton)
@@ -139,7 +143,7 @@ class CharacterDetailViewController: UIViewController {
     }
     
     private func updateUI() {
-        guard let characterResult = viewModel?.getCharacterResult() else { return }
+        guard let characterResult = viewModel.getCharacterResult() else { return }
         characterNameLabel.text = characterResult.name
         characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         characterImageView.sd_setImage(with: URL(string: characterResult.image ?? ""), placeholderImage: UIImage(imageLiteralResourceName: Constants.PlaceholderImage.name))
@@ -155,9 +159,9 @@ class CharacterDetailViewController: UIViewController {
     }
     
     private func reloadTableView() {
-        viewModel?.getData()
+        viewModel.getData()
         loaderView.startAnimating()
-        viewModel?.listenEpisodeDetailCallback = { [weak self] in
+        viewModel.listenDataCallback = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.episodeTableView.reloadData()
@@ -167,25 +171,18 @@ class CharacterDetailViewController: UIViewController {
     }
     
     private func setupErrorHandling() {
-        viewModel?.showErrorAlertViewCallback = { [weak self] error in
+        viewModel.showErrorAlertViewCallback = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                let alertView = AlertView.shared.getAlertView(title: Constants.AlertView.title,
-                                                              message: error.localizedDescription,
-                                                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
-                                                              dismissButtonCallback: nil)
-                self.present(alertView, animated: true)
+                self.showAlertView(title: Constants.AlertView.title,
+                              message: error.localizedDescription,
+                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
+                              dismissButtonCallback: nil)
             }
         }
     }
     
-    private func setupLoaderView() {
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loaderView)
-        loaderView.snp.makeConstraints { (make) in
-            make.centerX.centerY.equalTo(view)
-        }
-    }
+    // MARK: - Actions
     
     @objc private func doneButtonTapped() {
         dismiss(animated: true)
@@ -195,14 +192,14 @@ class CharacterDetailViewController: UIViewController {
 extension CharacterDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.getEpisodeList().count ?? 0
+        return viewModel.getEpisodeList().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = episodeTableView.dequeueReusableCell(withIdentifier: Constants.CharacterDetail.tableViewCellId) else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = viewModel?.getEpisodeList()[indexPath.row]
+        cell.textLabel?.text = viewModel.getEpisodeList()[indexPath.row]
         cell.textLabel?.textColor = .white
         cell.backgroundColor = Constants.DropDownButton.backgroundColor
         return cell

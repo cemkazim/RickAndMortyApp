@@ -70,7 +70,7 @@ extension CharacterListCollectionViewCell {
     func updateCell(with result: CharacterResult?) {
         guard let result = result else { return }
         characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        characterImageView.sd_setImage(with: URL(string: result.image ?? ""))
+        characterImageView.sd_setImage(with: URL(string: result.image ?? ""), placeholderImage: UIImage(imageLiteralResourceName: Constants.PlaceholderImage.name))
         characterNameLabel.text = result.name
     }
 }

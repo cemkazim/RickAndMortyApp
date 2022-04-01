@@ -34,6 +34,8 @@ class CharacterListViewController: UIViewController {
     
     var viewModel: CharacterListViewModel?
     
+    private var loaderView = UIActivityIndicatorView(style: .whiteLarge)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -43,6 +45,8 @@ class CharacterListViewController: UIViewController {
         setupConstraints()
         setupCollectionView()
         reloadCollectionView()
+        setupErrorHandling()
+        setupLoaderView()
     }
     
     private func addSubviews() {
@@ -73,12 +77,17 @@ class CharacterListViewController: UIViewController {
     
     private func reloadCollectionView() {
         viewModel?.getData()
+        loaderView.startAnimating()
         viewModel?.listenCharacterResultCallback = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.characterListCollectionView.reloadData()
+                self.loaderView.stopAnimating()
             }
         }
+    }
+    
+    private func setupErrorHandling() {
         viewModel?.showErrorAlertViewCallback = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -90,9 +99,18 @@ class CharacterListViewController: UIViewController {
             }
         }
     }
+    
+    private func setupLoaderView() {
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loaderView)
+        loaderView.snp.makeConstraints { (make) in
+            make.centerX.centerY.equalTo(view)
+        }
+    }
 }
 
 // MARK: - CharacterListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+
 extension CharacterListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -76,6 +76,8 @@ class CharacterDetailViewController: UIViewController {
     
     private var isTableViewVisible = false
     
+    private var loaderView = UIActivityIndicatorView(style: .whiteLarge)
+    
     var viewModel: CharacterDetailViewModel?
     
     override func viewDidLoad() {
@@ -87,6 +89,7 @@ class CharacterDetailViewController: UIViewController {
         updateUI()
         setupTableView()
         reloadTableView()
+        setupErrorHandling()
     }
     
     private func addSubviews() {
@@ -139,7 +142,7 @@ class CharacterDetailViewController: UIViewController {
         guard let characterResult = viewModel?.getCharacterResult() else { return }
         characterNameLabel.text = characterResult.name
         characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        characterImageView.sd_setImage(with: URL(string: characterResult.image ?? ""))
+        characterImageView.sd_setImage(with: URL(string: characterResult.image ?? ""), placeholderImage: UIImage(imageLiteralResourceName: Constants.PlaceholderImage.name))
         characterStatusAndSpeciesLabel.text = "\(characterResult.status ?? Status.unknown.rawValue), \(characterResult.species ?? Status.unknown.rawValue)"
         characterGenderLabel.text = characterResult.gender
     }
@@ -153,11 +156,34 @@ class CharacterDetailViewController: UIViewController {
     
     private func reloadTableView() {
         viewModel?.getData()
+        loaderView.startAnimating()
         viewModel?.listenEpisodeDetailCallback = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.episodeTableView.reloadData()
+                self.loaderView.stopAnimating()
             }
+        }
+    }
+    
+    private func setupErrorHandling() {
+        viewModel?.showErrorAlertViewCallback = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let alertView = AlertView.shared.getAlertView(title: Constants.AlertView.title,
+                                                              message: error.localizedDescription,
+                                                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
+                                                              dismissButtonCallback: nil)
+                self.present(alertView, animated: true)
+            }
+        }
+    }
+    
+    private func setupLoaderView() {
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loaderView)
+        loaderView.snp.makeConstraints { (make) in
+            make.centerX.centerY.equalTo(view)
         }
     }
     

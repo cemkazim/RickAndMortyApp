@@ -7,11 +7,15 @@
 
 import UIKit
 
+// MARK: - DropDownButtonViewDelegate
+
 protocol DropDownButtonViewDelegate: AnyObject {
     func dropDownButtonTouches()
 }
 
 class DropDownButtonView: UIView {
+    
+    // MARK: - Properties
     
     private var containerView: UIView = {
         let view = UIView()
@@ -40,6 +44,8 @@ class DropDownButtonView: UIView {
     
     private weak var delegate: DropDownButtonViewDelegate?
     
+    // MARK: - Initializers
+    
     init(frame: CGRect, delegate: DropDownButtonViewDelegate?, dropDownTitleText: String) {
         super.init(frame: frame)
         self.delegate = delegate
@@ -53,6 +59,8 @@ class DropDownButtonView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         addSubview(containerView)
@@ -77,6 +85,8 @@ class DropDownButtonView: UIView {
             make.right.equalTo(containerView.snp.right).offset(-18)
         }
     }
+    
+    // MARK: - Actions
     
     @objc private func dropDownTapped() {
         isDropDownOpened.toggle()

@@ -9,9 +9,15 @@ import Foundation
 
 class DataProvider {
     
+    // MARK: - Properties
+    
     static let shared = DataProvider()
     
+    // MARK: - Initializers
+    
     private init() {}
+    
+    // MARK: - Methods
     
     func getAllCharacters(pageNumber: Int, completionHandler: @escaping CharacterListCompletion) {
         let url = URLCreator.shared.getAllCharactersURL(pageNumber: pageNumber)

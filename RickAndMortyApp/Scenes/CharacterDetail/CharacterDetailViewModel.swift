@@ -7,16 +7,20 @@
 
 import Foundation
 
-class CharacterDetailViewModel {
+class CharacterDetailViewModel: BaseViewModel {
+    
+    // MARK: - Properties
     
     private var characterResult: CharacterResult?
     private var episodeList: [String] = []
-    var showErrorAlertViewCallback: ((Error) -> Void)?
-    var listenEpisodeDetailCallback: (() -> Void)?
+    
+    // MARK: - Initializers
     
     init(characterResult: CharacterResult? = nil) {
         self.characterResult = characterResult
     }
+    
+    // MARK: - Methods
     
     func getData() {
         guard let episodeList = characterResult?.episode else { return }
@@ -27,7 +31,7 @@ class CharacterDetailViewModel {
                 self.showErrorAlertViewCallback?(error)
             case .success(let data):
                 self.handleCharacterList(with: data)
-                self.listenEpisodeDetailCallback?()
+                self.listenDataCallback?()
             }
         }
     }

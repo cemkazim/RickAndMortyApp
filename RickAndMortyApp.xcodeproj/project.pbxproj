@@ -18,9 +18,10 @@
 		02A33E2D27F652F30063C0FC /* CharacterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2C27F652F30063C0FC /* CharacterListModel.swift */; };
 		02A33E3527F70B040063C0FC /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E3427F70B040063C0FC /* CharacterDetailViewController.swift */; };
 		02A33E3727F70B0D0063C0FC /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E3627F70B0D0063C0FC /* CharacterDetailViewModel.swift */; };
-		02A33E3927F70CB20063C0FC /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E3827F70CB20063C0FC /* AlertView.swift */; };
 		02A33E3B27F724860063C0FC /* DropDownButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E3A27F724860063C0FC /* DropDownButtonView.swift */; };
 		02A33E3D27F742640063C0FC /* EpisodeDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E3C27F742640063C0FC /* EpisodeDetailModel.swift */; };
+		02A33E4127F7A8930063C0FC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E4027F7A8930063C0FC /* BaseViewController.swift */; };
+		02A33E4327F7A89A0063C0FC /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E4227F7A89A0063C0FC /* BaseViewModel.swift */; };
 		02FBD7FD27F60AE700959860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD7FC27F60AE700959860 /* AppDelegate.swift */; };
 		02FBD7FF27F60AE700959860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD7FE27F60AE700959860 /* SceneDelegate.swift */; };
 		02FBD80127F60AE700959860 /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD80027F60AE700959860 /* CharacterListViewController.swift */; };
@@ -41,9 +42,10 @@
 		02A33E2C27F652F30063C0FC /* CharacterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListModel.swift; sourceTree = "<group>"; };
 		02A33E3427F70B040063C0FC /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
 		02A33E3627F70B0D0063C0FC /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
-		02A33E3827F70CB20063C0FC /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		02A33E3A27F724860063C0FC /* DropDownButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownButtonView.swift; sourceTree = "<group>"; };
 		02A33E3C27F742640063C0FC /* EpisodeDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailModel.swift; sourceTree = "<group>"; };
+		02A33E4027F7A8930063C0FC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		02A33E4227F7A89A0063C0FC /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		02FBD7F927F60AE700959860 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FBD7FC27F60AE700959860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02FBD7FE27F60AE700959860 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				02A33E1427F635050063C0FC /* CharacterListCollectionViewCell.swift */,
-				02A33E3827F70CB20063C0FC /* AlertView.swift */,
 				02A33E3A27F724860063C0FC /* DropDownButtonView.swift */,
 			);
 			path = Components;
@@ -145,6 +146,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		02A33E3F27F7A8860063C0FC /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				02A33E4027F7A8930063C0FC /* BaseViewController.swift */,
+				02A33E4227F7A89A0063C0FC /* BaseViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		02FBD7F027F60AE700959860 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				02A33E0127F60DD70063C0FC /* Scenes */,
+				02A33E3F27F7A8860063C0FC /* Base */,
 				02A33E1B27F639420063C0FC /* Network */,
 				02A33E3E27F742C30063C0FC /* Model */,
 				02A33E1327F634DF0063C0FC /* Components */,
@@ -313,7 +324,7 @@
 				02A33E2A27F64EA20063C0FC /* URLCreator.swift in Sources */,
 				02A33E1527F635050063C0FC /* CharacterListCollectionViewCell.swift in Sources */,
 				02A33E1E27F6398B0063C0FC /* APIManager.swift in Sources */,
-				02A33E3927F70CB20063C0FC /* AlertView.swift in Sources */,
+				02A33E4127F7A8930063C0FC /* BaseViewController.swift in Sources */,
 				02A33E2227F639DA0063C0FC /* TypeAliases.swift in Sources */,
 				02A33E3B27F724860063C0FC /* DropDownButtonView.swift in Sources */,
 				02FBD80127F60AE700959860 /* CharacterListViewController.swift in Sources */,
@@ -321,6 +332,7 @@
 				02A33E2D27F652F30063C0FC /* CharacterListModel.swift in Sources */,
 				02FBD7FD27F60AE700959860 /* AppDelegate.swift in Sources */,
 				02A33E3527F70B040063C0FC /* CharacterDetailViewController.swift in Sources */,
+				02A33E4327F7A89A0063C0FC /* BaseViewModel.swift in Sources */,
 				02A33E3D27F742640063C0FC /* EpisodeDetailModel.swift in Sources */,
 				02A33E3727F70B0D0063C0FC /* CharacterDetailViewModel.swift in Sources */,
 				02FBD7FF27F60AE700959860 /* SceneDelegate.swift in Sources */,

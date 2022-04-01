@@ -9,9 +9,15 @@ import Foundation
 
 class APIManager {
     
+    // MARK: - Properties
+    
     static let shared = APIManager()
     
+    // MARK: - Initializers
+    
     private init() {}
+    
+    // MARK: - Methods
     
     /// Description: Request the API data with parameters (T is a decodable model).
     /// - Parameters:

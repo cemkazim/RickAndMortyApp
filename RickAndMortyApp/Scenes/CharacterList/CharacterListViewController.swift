@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-class CharacterListViewController: UIViewController {
+class CharacterListViewController: BaseViewController {
+    
+    // MARK: - Properties
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -32,7 +34,9 @@ class CharacterListViewController: UIViewController {
         return view
     }()
     
-    var viewModel: CharacterListViewModel?
+    var viewModel = CharacterListViewModel()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +47,10 @@ class CharacterListViewController: UIViewController {
         setupConstraints()
         setupCollectionView()
         reloadCollectionView()
+        setupErrorHandling()
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(titleLabel)
@@ -52,8 +59,8 @@ class CharacterListViewController: UIViewController {
     
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(65)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.left.equalTo(view.snp.left).offset(10)
             make.height.equalTo(29)
             make.width.equalTo(2 * view.frame.width / 3)
         }
@@ -72,51 +79,55 @@ class CharacterListViewController: UIViewController {
     }
     
     private func reloadCollectionView() {
-        viewModel?.getData()
-        viewModel?.listenCharacterResultCallback = { [weak self] in
+        viewModel.getData()
+        loaderView.startAnimating()
+        viewModel.listenDataCallback = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.characterListCollectionView.reloadData()
+                self.loaderView.stopAnimating()
             }
         }
-        viewModel?.showErrorAlertViewCallback = { [weak self] error in
+    }
+    
+    private func setupErrorHandling() {
+        viewModel.showErrorAlertViewCallback = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                let alertView = AlertView.shared.getAlertView(title: Constants.AlertView.title,
-                                                              message: error.localizedDescription,
-                                                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
-                                                              dismissButtonCallback: nil)
-                self.present(alertView, animated: true)
+                self.showAlertView(title: Constants.AlertView.title,
+                              message: error.localizedDescription,
+                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
+                              dismissButtonCallback: nil)
             }
         }
     }
 }
 
 // MARK: - CharacterListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+
 extension CharacterListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.getCharacterResultList().count ?? 0
+        return viewModel.getCharacterResultList().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CharacterList.cellId, for: indexPath) as? CharacterListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
+        let characterResult = viewModel.getCharacterResultList()[indexPath.row]
         cell.updateCell(with: characterResult)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let characterDetailViewController = CharacterDetailViewController()
-        let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
+        let characterResult = viewModel.getCharacterResultList()[indexPath.row]
         characterDetailViewController.viewModel = CharacterDetailViewModel(characterResult: characterResult)
         present(characterDetailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let viewModel = viewModel else { return }
         if viewModel.getCharacterResultList().count == viewModel.getPageItemLimit() * viewModel.getPageCount() {
             if indexPath.row == viewModel.getCharacterResultList().count - 1 {
                 viewModel.increasePageCount()

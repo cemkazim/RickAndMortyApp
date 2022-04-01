@@ -9,6 +9,8 @@ import Foundation
 
 class URLCreator {
     
+    // MARK: - Properties
+    
     public static let shared = URLCreator()
     
     private var baseURLComponents: URLComponents = {
@@ -18,7 +20,11 @@ class URLCreator {
         return components
     }()
     
+    // MARK: - Initializers
+    
     private init() {}
+    
+    // MARK: - Methods
     
     func getAllCharactersURL(pageNumber: Int) -> URL? {
         baseURLComponents.path = "/api/character"

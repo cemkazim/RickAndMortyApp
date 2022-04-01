@@ -7,13 +7,15 @@
 
 import Foundation
 
-class CharacterListViewModel {
+class CharacterListViewModel: BaseViewModel {
+    
+    // MARK: - Properties
     
     private var characterResultList: [CharacterResult] = []
     private var pageCount = 1
     private var pageItemLimit = 20
-    var showErrorAlertViewCallback: ((Error) -> Void)?
-    var listenCharacterResultCallback: (() -> Void)?
+    
+    // MARK: - Methods
     
     func getData() {
         DataProvider.shared.getAllCharacters(pageNumber: pageCount) { [weak self] result in
@@ -23,7 +25,7 @@ class CharacterListViewModel {
                 self.showErrorAlertViewCallback?(error)
             case .success(let data):
                 self.handleCharacterList(with: data)
-                self.listenCharacterResultCallback?()
+                self.listenDataCallback?()
             }
         }
     }

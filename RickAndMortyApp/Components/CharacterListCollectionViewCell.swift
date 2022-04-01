@@ -53,6 +53,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         characterImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.width.equalTo(157)
             make.height.equalTo(180)
         }
@@ -65,12 +66,13 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - CharacterListCollectionViewCell
+
 extension CharacterListCollectionViewCell {
     
     func updateCell(with result: CharacterResult?) {
         guard let result = result else { return }
         characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        characterImageView.sd_setImage(with: URL(string: result.image ?? ""))
+        characterImageView.sd_setImage(with: URL(string: result.image ?? ""), placeholderImage: UIImage(imageLiteralResourceName: Constants.PlaceholderImage.name))
         characterNameLabel.text = result.name
     }
 }

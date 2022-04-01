@@ -35,4 +35,9 @@ struct Constants {
         static let dropDownMenuOpenedArrowImage = "drop_down_menu_opened_arrow"
         static let dropDownMenuClosedArrowImage = "drop_down_menu_closed_arrow"
     }
+    
+    enum PlaceholderImage {
+        
+        static let name = "placeholder_image"
+    }
 }

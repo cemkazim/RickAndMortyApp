@@ -9,5 +9,14 @@ import Foundation
 
 struct Constants {
     
-    static let characterListViewControllerCellId = "CharacterListCollectionViewCell"
+    enum CharacterListCollectionViewCell {
+        
+        static let id = "CharacterListCollectionViewCell"
+    }
+    
+    enum AlertView {
+        
+        static let title = "Error"
+        static let dismissButtonTitle = "Dismiss"
+    }
 }

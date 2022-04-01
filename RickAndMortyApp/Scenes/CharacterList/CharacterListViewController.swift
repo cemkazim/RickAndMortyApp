@@ -68,7 +68,7 @@ class CharacterListViewController: UIViewController {
     private func setupCollectionView() {
         characterListCollectionView.delegate = self
         characterListCollectionView.dataSource = self
-        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.characterListViewControllerCellId)
+        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.CharacterListCollectionViewCell.id)
     }
     
     private func reloadCollectionView() {
@@ -77,6 +77,16 @@ class CharacterListViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.characterListCollectionView.reloadData()
+            }
+        }
+        viewModel?.showErrorAlertViewCallback = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let alertView = AlertView.shared.getAlertView(title: Constants.AlertView.title,
+                                                              message: error.localizedDescription,
+                                                              dismissButtonTitle: Constants.AlertView.dismissButtonTitle,
+                                                              dismissButtonCallback: nil)
+                self.present(alertView, animated: true)
             }
         }
     }
@@ -90,7 +100,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.characterListViewControllerCellId, for: indexPath) as? CharacterListCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CharacterListCollectionViewCell.id, for: indexPath) as? CharacterListCollectionViewCell else {
             return UICollectionViewCell()
         }
         let characterResult = viewModel?.getCharacterResultList()[indexPath.row]

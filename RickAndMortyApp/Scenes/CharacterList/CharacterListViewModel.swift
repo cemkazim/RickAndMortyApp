@@ -12,7 +12,7 @@ class CharacterListViewModel {
     private var characterResultList: [CharacterResult] = []
     private var pageCount = 1
     private var pageItemLimit = 20
-    
+    var showErrorAlertViewCallback: ((Error) -> Void)?
     var listenCharacterResultCallback: (() -> Void)?
     
     func getData() {
@@ -20,7 +20,7 @@ class CharacterListViewModel {
             guard let self = self else { return }
             switch result {
             case .failure(let error):
-                print(error)
+                self.showErrorAlertViewCallback?(error)
             case .success(let data):
                 self.handleCharacterList(with: data)
                 self.listenCharacterResultCallback?()

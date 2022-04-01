@@ -6,6 +6,7 @@ target 'RickAndMortyApp' do
   use_frameworks!
   
   pod 'SnapKit', '~> 5.0.0'
+  pod 'SDWebImage', '~> 5.0'
 
   # Pods for RickAndMortyApp
 

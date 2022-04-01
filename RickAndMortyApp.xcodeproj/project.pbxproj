@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		02A33E0827F622BA0063C0FC /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E0727F622BA0063C0FC /* CharacterListViewModel.swift */; };
-		02A33E0E27F62D000063C0FC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E0D27F62D000063C0FC /* BaseViewController.swift */; };
-		02A33E1227F632C20063C0FC /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E1127F632C20063C0FC /* BaseViewModel.swift */; };
 		02A33E1527F635050063C0FC /* CharacterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E1427F635050063C0FC /* CharacterListCollectionViewCell.swift */; };
 		02A33E1E27F6398B0063C0FC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E1D27F6398B0063C0FC /* APIManager.swift */; };
 		02A33E2027F6399F0063C0FC /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E1F27F6399F0063C0FC /* DataProvider.swift */; };
 		02A33E2227F639DA0063C0FC /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2127F639DA0063C0FC /* TypeAliases.swift */; };
 		02A33E2427F639FC0063C0FC /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2327F639FC0063C0FC /* HTTPMethods.swift */; };
 		02A33E2627F63AE10063C0FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2527F63AE10063C0FC /* Constants.swift */; };
+		02A33E2A27F64EA20063C0FC /* URLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2927F64EA20063C0FC /* URLCreator.swift */; };
+		02A33E2D27F652F30063C0FC /* CharacterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A33E2C27F652F30063C0FC /* CharacterListModel.swift */; };
 		02FBD7FD27F60AE700959860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD7FC27F60AE700959860 /* AppDelegate.swift */; };
 		02FBD7FF27F60AE700959860 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD7FE27F60AE700959860 /* SceneDelegate.swift */; };
 		02FBD80127F60AE700959860 /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD80027F60AE700959860 /* CharacterListViewController.swift */; };
@@ -26,14 +26,14 @@
 
 /* Begin PBXFileReference section */
 		02A33E0727F622BA0063C0FC /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
-		02A33E0D27F62D000063C0FC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		02A33E1127F632C20063C0FC /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		02A33E1427F635050063C0FC /* CharacterListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCollectionViewCell.swift; sourceTree = "<group>"; };
 		02A33E1D27F6398B0063C0FC /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		02A33E1F27F6399F0063C0FC /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		02A33E2127F639DA0063C0FC /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		02A33E2327F639FC0063C0FC /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
 		02A33E2527F63AE10063C0FC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		02A33E2927F64EA20063C0FC /* URLCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCreator.swift; sourceTree = "<group>"; };
+		02A33E2C27F652F30063C0FC /* CharacterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListModel.swift; sourceTree = "<group>"; };
 		02FBD7F927F60AE700959860 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FBD7FC27F60AE700959860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02FBD7FE27F60AE700959860 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,17 +82,9 @@
 			children = (
 				02FBD80027F60AE700959860 /* CharacterListViewController.swift */,
 				02A33E0727F622BA0063C0FC /* CharacterListViewModel.swift */,
+				02A33E2C27F652F30063C0FC /* CharacterListModel.swift */,
 			);
 			path = CharacterList;
-			sourceTree = "<group>";
-		};
-		02A33E0C27F62CF00063C0FC /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				02A33E0D27F62D000063C0FC /* BaseViewController.swift */,
-				02A33E1127F632C20063C0FC /* BaseViewModel.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		02A33E1327F634DF0063C0FC /* Components */ = {
@@ -118,6 +110,7 @@
 				02A33E1D27F6398B0063C0FC /* APIManager.swift */,
 				02A33E1F27F6399F0063C0FC /* DataProvider.swift */,
 				02A33E2327F639FC0063C0FC /* HTTPMethods.swift */,
+				02A33E2927F64EA20063C0FC /* URLCreator.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -143,7 +136,6 @@
 		02FBD7FB27F60AE700959860 /* RickAndMortyApp */ = {
 			isa = PBXGroup;
 			children = (
-				02A33E0C27F62CF00063C0FC /* Base */,
 				02A33E0127F60DD70063C0FC /* Scenes */,
 				02A33E1B27F639420063C0FC /* Network */,
 				02A33E1327F634DF0063C0FC /* Components */,
@@ -285,17 +277,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02A33E0E27F62D000063C0FC /* BaseViewController.swift in Sources */,
 				02A33E0827F622BA0063C0FC /* CharacterListViewModel.swift in Sources */,
 				02A33E2027F6399F0063C0FC /* DataProvider.swift in Sources */,
+				02A33E2A27F64EA20063C0FC /* URLCreator.swift in Sources */,
 				02A33E1527F635050063C0FC /* CharacterListCollectionViewCell.swift in Sources */,
 				02A33E1E27F6398B0063C0FC /* APIManager.swift in Sources */,
 				02A33E2227F639DA0063C0FC /* TypeAliases.swift in Sources */,
 				02FBD80127F60AE700959860 /* CharacterListViewController.swift in Sources */,
 				02A33E2427F639FC0063C0FC /* HTTPMethods.swift in Sources */,
+				02A33E2D27F652F30063C0FC /* CharacterListModel.swift in Sources */,
 				02FBD7FD27F60AE700959860 /* AppDelegate.swift in Sources */,
 				02FBD7FF27F60AE700959860 /* SceneDelegate.swift in Sources */,
-				02A33E1227F632C20063C0FC /* BaseViewModel.swift in Sources */,
 				02A33E2627F63AE10063C0FC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

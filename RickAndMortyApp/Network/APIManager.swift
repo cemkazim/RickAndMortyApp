@@ -18,7 +18,8 @@ class APIManager {
     ///   - url: Formatted url for API data
     ///   - requestMethod: Any HTTPMethod
     ///   - onComplete: Pass the data with completion
-    func request<T: Decodable>(url: URL, requestMethod: HTTPMethods, onComplete: @escaping RequestCompletion<T>) {
+    func request<T: Decodable>(url: URL?, requestMethod: HTTPMethods, onComplete: @escaping RequestCompletion<T>) {
+        guard let url = url else { return }
         var request = URLRequest(url: url)
         request.httpMethod = requestMethod.rawValue
         let task = URLSession.shared

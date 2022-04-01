@@ -6,23 +6,24 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CharacterListCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    private lazy var characterImageView: UIImageView = {
+    private var characterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-//        imageView.layer.cornerRadius = 180 / 16
+        imageView.layer.cornerRadius = 10
         return imageView
     }()
     
-    private lazy var characterNameLabel: UILabel = {
+    private var characterNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.bold)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.numberOfLines = .zero
         label.textColor = .white
         label.textAlignment = .left
@@ -51,12 +52,13 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         characterImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.width.equalToSuperview()
+            make.width.equalTo(157)
             make.height.equalTo(180)
         }
         characterNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(characterImageView).offset(10)
-            make.width.equalToSuperview()
+            make.top.equalTo(characterImageView.snp.bottom).offset(10)
+            make.width.equalTo(157)
+            make.height.equalTo(21)
         }
     }
 }
@@ -64,8 +66,9 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
 // MARK: - CharacterListCollectionViewCell
 extension CharacterListCollectionViewCell {
     
-    func setCharactersData(indexPath: IndexPath) {
-        characterImageView.image = UIImage()
-        characterNameLabel.text = "Cem Kazım"
+    func updateCell(with result: CharacterResult?) {
+        guard let result = result else { return }
+        characterImageView.sd_setImage(with: URL(string: result.image ?? ""))
+        characterNameLabel.text = result.name
     }
 }

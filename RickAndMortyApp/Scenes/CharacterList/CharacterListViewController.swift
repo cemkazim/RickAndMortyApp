@@ -68,7 +68,7 @@ class CharacterListViewController: UIViewController {
     private func setupCollectionView() {
         characterListCollectionView.delegate = self
         characterListCollectionView.dataSource = self
-        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.CharacterListCollectionViewCell.id)
+        characterListCollectionView.register(CharacterListCollectionViewCell.self, forCellWithReuseIdentifier: Constants.CharacterList.cellId)
     }
     
     private func reloadCollectionView() {
@@ -100,7 +100,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CharacterListCollectionViewCell.id, for: indexPath) as? CharacterListCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CharacterList.cellId, for: indexPath) as? CharacterListCollectionViewCell else {
             return UICollectionViewCell()
         }
         let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
@@ -109,7 +109,10 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let characterDetailViewController = CharacterDetailViewController()
+        let characterResult = viewModel?.getCharacterResultList()[indexPath.row]
+        characterDetailViewController.viewModel = CharacterDetailViewModel(characterResult: characterResult)
+        present(characterDetailViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -123,11 +126,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

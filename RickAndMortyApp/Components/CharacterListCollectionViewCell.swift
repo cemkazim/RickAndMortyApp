@@ -53,6 +53,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         characterImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.width.equalTo(157)
             make.height.equalTo(180)
         }

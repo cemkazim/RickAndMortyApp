@@ -56,8 +56,8 @@ class CharacterListViewController: UIViewController {
     
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(65)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.left.equalTo(view.snp.left).offset(10)
             make.height.equalTo(29)
             make.width.equalTo(2 * view.frame.width / 3)
         }

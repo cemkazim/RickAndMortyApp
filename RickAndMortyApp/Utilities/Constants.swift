@@ -13,20 +13,21 @@ struct Constants {
     enum CharacterList {
         
         static let cellId = "CharacterListCollectionViewCell"
+        static let titleText = "character_list_view_controller_title_text".localized()
     }
     
     enum CharacterDetail {
         
-        static let doneButtonTitle = "Done"
+        static let doneButtonTitle = "done_button_text".localized()
         static let doneButtonColor = UIColor(red: 138/255, green: 103/255, blue: 190/255, alpha: 1)
         static let tableViewCellId = "UITableViewCell"
-        static let dropDownTitleText = "Episodes"
+        static let dropDownTitleText = "drop_down_title_text".localized()
     }
     
     enum AlertView {
         
-        static let title = "Error"
-        static let dismissButtonTitle = "Dismiss"
+        static let title = "alert_view_title_text".localized()
+        static let dismissButtonTitle = "dismiss_button_title_text".localized()
     }
     
     enum DropDownButton {

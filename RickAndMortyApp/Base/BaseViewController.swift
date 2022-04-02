@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class BaseViewController: UIViewController {
     
@@ -26,7 +27,7 @@ class BaseViewController: UIViewController {
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loaderView)
         loaderView.snp.makeConstraints { (make) in
-            make.centerX.centerY.equalTo(view)
+            make.center.equalTo(view)
         }
     }
     

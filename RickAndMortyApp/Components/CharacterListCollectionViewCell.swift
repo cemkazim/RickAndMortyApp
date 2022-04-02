@@ -35,8 +35,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews()
-        setupConstraints()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +44,11 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    private func configureUI() {
+        addSubviews()
+        setupConstraints()
+    }
+    
     private func addSubviews() {
         addSubview(characterImageView)
         addSubview(characterNameLabel)
@@ -52,8 +56,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         characterImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.top.centerX.equalToSuperview()
             make.width.equalTo(157)
             make.height.equalTo(180)
         }
@@ -69,8 +72,7 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
 
 extension CharacterListCollectionViewCell {
     
-    func updateCell(with result: CharacterResult?) {
-        guard let result = result else { return }
+    func updateCell(with result: CharacterResult) {
         characterImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         characterImageView.sd_setImage(with: URL(string: result.image ?? ""), placeholderImage: UIImage(imageLiteralResourceName: Constants.PlaceholderImage.name))
         characterNameLabel.text = result.name

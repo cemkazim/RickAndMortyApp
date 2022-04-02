@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  RickAndMortyApp
+
+  Created by Cem Kazım Genel on 02/04/2022.
+  
+*/
+
+"character_list_view_controller_title_text" = "Characters";
+"done_button_text" = "Done";
+"drop_down_title_text" = "Episodes";
+"alert_view_title_text" = "Error";
+"dismiss_button_title_text" = "Dismiss";

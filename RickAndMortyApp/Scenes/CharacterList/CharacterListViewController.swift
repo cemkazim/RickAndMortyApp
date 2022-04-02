@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class CharacterListViewController: BaseViewController {
     
@@ -19,7 +18,7 @@ class CharacterListViewController: BaseViewController {
         label.numberOfLines = .zero
         label.textColor = .white
         label.textAlignment = .left
-        label.text = "Characters"
+        label.text = Constants.CharacterList.titleText
         return label
     }()
     
@@ -40,17 +39,20 @@ class CharacterListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+    }
+    
+    // MARK: - Methods
+    
+    private func configureUI() {
         view.backgroundColor = .black
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        viewModel = CharacterListViewModel()
         addSubviews()
         setupConstraints()
         setupCollectionView()
         reloadCollectionView()
         setupErrorHandling()
     }
-    
-    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(titleLabel)

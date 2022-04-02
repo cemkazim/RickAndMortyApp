@@ -70,10 +70,7 @@ class DropDownButtonView: UIView {
     
     private func setupConstraints() {
         containerView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.left.right.bottom.equalToSuperview()
         }
         dropDownTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top).offset(22)
